@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
-export async function Login(formdata: FormData) {
+export async function login(formdata: FormData) {
     const username = formdata.get('username')
     const cookieStore = await cookies()
 
@@ -13,4 +13,11 @@ export async function Login(formdata: FormData) {
     })
 
     redirect('/dashboard')
+}
+
+export async function logout() {
+    const cookieStore = await cookies()
+
+    cookieStore.delete('authToken')
+    redirect('/login')
 }
