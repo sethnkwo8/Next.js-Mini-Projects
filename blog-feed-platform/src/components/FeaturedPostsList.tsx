@@ -9,7 +9,7 @@ export async function FeaturedPostList({ limit }: PostListProps) {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredPosts.map(post => (
-                <PostCard key={post.id} userId={post.userId} title={post.title} body={post.body} />
+                <PostCard key={post.id} id={post.id} userId={post.userId} title={post.title} body={post.body} />
             ))}
         </div>
     )

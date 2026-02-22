@@ -6,6 +6,7 @@ export interface Post {
 }
 
 export interface PostCardProps {
+    id: number
     userId: number
     title: string
     body: string
