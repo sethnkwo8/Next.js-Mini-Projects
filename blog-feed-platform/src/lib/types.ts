@@ -14,3 +14,8 @@ export interface PostCardProps {
 export interface PostListProps {
     limit: number
 }
+
+export interface SlowSectionProps {
+    title: string
+    body: string
+}

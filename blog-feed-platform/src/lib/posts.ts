@@ -11,3 +11,10 @@ export async function fetchPosts(limit: number) {
     return data
 
 }
+
+export async function fetchPost(postId: number) {
+    const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
+    const data: Post = await res.json()
+
+    return data
+}
