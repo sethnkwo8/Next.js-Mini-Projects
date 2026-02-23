@@ -1,6 +1,8 @@
 'use server'
 
 import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function CreatePost(formData: FormData) {
     const title = formData.get('title')
@@ -23,4 +25,10 @@ export async function CreatePost(formData: FormData) {
     console.log('Success');
 
     revalidatePath('/');
+}
+
+export async function logout() {
+    const cookieStore = await cookies();
+    cookieStore.delete('authToken');
+    redirect('/login')
 }
