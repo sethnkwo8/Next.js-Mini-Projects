@@ -1,9 +1,8 @@
 import { PostListProps } from "@/lib/types";
 import { PostCard } from "./PostCard"
-import { fetchPosts } from "@/lib/posts"
 
-export async function FeaturedPostList({ limit }: PostListProps) {
-    const posts = await fetchPosts(limit);
+export async function FeaturedPostList({ results }: PostListProps) {
+    const posts = results;
     const featuredPosts = posts.filter(p => p.userId == 2)
 
     return (

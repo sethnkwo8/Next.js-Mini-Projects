@@ -13,10 +13,14 @@ export interface PostCardProps {
 }
 
 export interface PostListProps {
-    limit: number
+    results: Post[]
 }
 
 export interface SlowSectionProps {
     title: string
     body: string
+}
+
+export interface NewPostProps {
+    setShowForm(value: boolean): void
 }

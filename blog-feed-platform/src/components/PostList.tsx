@@ -1,9 +1,8 @@
-import { PostListProps } from "@/lib/types";
 import { PostCard } from "./PostCard"
-import { fetchPosts } from "@/lib/posts"
+import { PostListProps } from "@/lib/types";
 
-export async function PostList({ limit }: PostListProps) {
-    const posts = await fetchPosts(limit);
+export async function PostList({ results }: PostListProps) {
+    const posts = results;
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

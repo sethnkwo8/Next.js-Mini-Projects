@@ -1,18 +1,21 @@
 import { FeaturedPostList } from "@/components/FeaturedPostsList";
 import { PostList } from "@/components/PostList";
+import HomeClient from "@/components/HomeClient";
+import { fetchPosts } from "@/lib/posts";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const posts = await fetchPosts(15);
+
   return (
-    <div className="p-6 min-h-screen flex flex-col items-center space-y-2">
-      <h1 className="font-bold text-4xl">Blog</h1>
+    <HomeClient>
       <div className="w-full md:w-3/4 flex flex-col space-y-2 md:p-4 lg:p-6">
         <h2 className="text-2xl font-bold">All Posts</h2>
-        <PostList limit={15} />
+        <PostList results={posts} />
       </div>
       <div className="w-full md:w-3/4 flex flex-col space-y-2 md:p-4 lg:p-6">
         <h2 className="text-2xl font-bold">Featured Posts</h2>
-        <FeaturedPostList limit={15} />
+        <FeaturedPostList results={posts} />
       </div>
-    </div>
+    </HomeClient>
   )
 }

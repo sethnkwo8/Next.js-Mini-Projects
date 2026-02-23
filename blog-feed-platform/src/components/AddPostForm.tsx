@@ -1,0 +1,18 @@
+export function AddPostForm() {
+    return (
+        <div className="min-h-screen flex flex-row justify-center items-center text-white">
+            <form className="rounded-lg shadow-lg m-4 p-6 w-full md:w-1/2 flex flex-col space-y-4 bg-gray-500">
+                <h1 className="font-bold text-center text-4xl">Add Post</h1>
+                <div>
+                    <label className="text-xl" htmlFor="title">Title</label>
+                    <input className="w-full border-black border outline-0 rounded-lg p-2" id="title" type="text" />
+                </div>
+                <div>
+                    <label className="text-xl" htmlFor="description">Description</label>
+                    <input className="w-full border-black border outline-0 rounded-lg p-2" id="description" type="text" />
+                </div>
+                <button className="py-4 px-8 rounded-lg bg-gray-800 hover:bg-gray-700 transition-all ease-in-out duration-300">Add Post</button>
+            </form>
+        </div >
+    )
+}
