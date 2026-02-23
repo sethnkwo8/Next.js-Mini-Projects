@@ -1,36 +1,121 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Blog Mini Project
 
-## Getting Started
+A modern Next.js 15+ blog application demonstrating Server Components,
+Server Actions, authentication with middleware, and clean client/server separation.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Features
+
+- Server Components for data fetching
+- Client Components for UI interactivity
+- Server Actions for mutations (login, logout, create post)
+- Cookie-based authentication
+- Middleware route protection
+- No client-side auth logic
+- No page reloads
+- Optimistic navigation with `<Link />`
+
+---
+
+## 🧠 Key Concepts Demonstrated
+
+- Server vs Client Components
+- Server Actions (`'use server'`)
+- Form Actions
+- Middleware authentication
+- Route protection
+- Cookie handling
+- Layouts & metadata
+- Cache revalidation
+
+---
+
+## 🏗 Project Structure
+
+```code
+blog-feed-platform/
+└── src/
+    ├── app/
+    │    ├── login/
+    │    │   ├── actions.ts
+    │    │   ├── page.tsx
+    │    │   └── layout.tsx
+    │    ├── posts/
+    │    │   └── [id]/
+    │    │       ├── page.tsx
+    │    │       ├── loading.tsx
+    │    │       └── layout.tsx
+    │    ├── actions.ts
+    │    ├── globals.css
+    │    ├── layout.tsx
+    │    └── page.tsx
+    ├── components/
+    │   ├── AddPostForm.tsx
+    │   ├── FeaturedPostsList.tsx
+    │   ├── HomeClient.tsx
+    │   ├── NewPostButton.tsx
+    │   ├── PostCard.tsx
+    │   ├── PostList.tsx
+    │   └── SlowSection.tsx
+    ├── lib/
+    │   ├── posts.ts
+    │   └── types.ts
+    └── middleware.ts
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔐 Authentication Flow
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Login sets an HttpOnly cookie via Server Action
+- Middleware checks auth before rendering pages
+- Unauthorized users are redirected to `/login`
+- Authenticated users are redirected away from `/login`
+- Logout clears cookie server-side
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📡 Data Source
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Posts are fetched from:
+```
+https:/jsonplaceholder.typicode.com/posts
+```
+Used for demonstration purposes.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🛠 Tech Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Next.js (App Router)
+- React
+- TypeScript
+- Tailwind CSS
+- Server Actions
+- Middleware
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📌 Next Steps
+
+- Add database (Prisma)
+- Persist users & posts
+- Add ownership and relations
+- Integrate real authentication
+- Build full-stack Next.js + DRF portfolio project
+
+---
+
+## 🚀 Getting Started
+```bash
+npm install
+npm run dev
+```
+
+---
+
+## 👤 Author
+**Seth Nkwo**
+
+Built as a learning-focused mini project to master modern Next.js architecture.

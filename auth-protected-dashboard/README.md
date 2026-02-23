@@ -39,7 +39,7 @@ A secure, server-first authentication dashboard built with Next.js App Router, d
 ## 📂 Project Structure
 
 ```code
-my-next-app/
+auth-protected-dashboard/
 └── src/
     ├── app/
     │    ├── login/
