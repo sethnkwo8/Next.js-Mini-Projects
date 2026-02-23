@@ -24,3 +24,7 @@ export interface SlowSectionProps {
 export interface NewPostProps {
     setShowForm(value: boolean): void
 }
+
+export interface AddPostProps {
+    onCancel(): void
+}
