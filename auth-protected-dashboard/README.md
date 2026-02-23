@@ -43,11 +43,12 @@ auth-protected-dashboard/
 └── src/
     ├── app/
     │    ├── login/
-    │    ├── page.tsx
+    │    │   ├── page.tsx
     │    │   └── layout.tsx
     │    ├── dashboard/
     │    │   ├── page.tsx
     │    │   └── layout.tsx
+    │    ├── globals.css
     │    ├── layout.tsx
     │    └── page.tsx
     ├── components/
