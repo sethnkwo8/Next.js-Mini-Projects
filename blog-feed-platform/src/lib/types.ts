@@ -1,19 +1,18 @@
-export interface Post {
-    userId: number
-    id: number
-    title: string
-    body: string
-}
+import { Prisma } from "@/generated/prisma/client"
+
+export type PostWithAuthor = Prisma.PostGetPayload<{
+    include: { author: true }
+}>
 
 export interface PostCardProps {
-    id: number
-    userId: number
+    id: string
+    email: string
     title: string
     body: string
 }
 
 export interface PostListProps {
-    results: Post[]
+    results: PostWithAuthor[]
 }
 
 export interface SlowSectionProps {

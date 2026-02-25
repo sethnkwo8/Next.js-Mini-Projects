@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { fetchPost } from "@/lib/posts";
+import { fetchPostById } from "@/lib/posts";
 import { SlowSection } from "@/components/SlowSection";
 import { Suspense } from "react";
 
@@ -9,7 +9,7 @@ export default async function Page({
     params: Promise<{ id: string }>;
 }) {
     const { id } = await params
-    const post = await fetchPost(Number(id))
+    const post = await fetchPostById(id)
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center">
@@ -21,9 +21,9 @@ export default async function Page({
                     width={130}
                     height={80}
                 />
-                <h1 className="font-bold text-2xl">User {post.userId}</h1>
+                <h1 className="font-bold text-2xl">{post?.author.email}</h1>
                 <Suspense fallback={<p>loading...</p>}>
-                    <SlowSection title={post.title} body={post.body} />
+                    <SlowSection title={`${post?.title}`} body={`${post?.body}`} />
                 </Suspense>
             </div>
         </div>

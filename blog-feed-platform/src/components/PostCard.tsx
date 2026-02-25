@@ -2,7 +2,7 @@ import Image from "next/image"
 import { PostCardProps } from "@/lib/types"
 import Link from "next/link";
 
-export function PostCard({ id, userId, title, body }: PostCardProps) {
+export function PostCard({ id, email, title, body }: PostCardProps) {
     return (
         <Link href={`/posts/${id}`} >
             <div className="rounded-lg shadow-lg p-4 flex flex-col space-y-2 bg-gray-500 text-white hover:scale-105
@@ -17,7 +17,7 @@ export function PostCard({ id, userId, title, body }: PostCardProps) {
                         />
                     </div>
                     <div>
-                        <p>User {userId}</p>
+                        <p>{email}</p>
                     </div>
                 </div>
                 <div>
