@@ -1,26 +1,24 @@
 'use server'
-
+import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export async function CreatePost(formData: FormData) {
-    const title = formData.get('title')
-    const description = formData.get('description')
+    const title = formData.get('title') as string
+    const body = formData.get('body') as string
 
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
-        method: 'POST',
-        body: JSON.stringify({
+    if (!title || !body) {
+        throw new Error('Title and Body are required')
+    }
+
+    await prisma.post.create({
+        data: {
             title: title,
-            description: description,
-            userId: 1,
-        }),
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        },
-    });
-
-    const data = await response.json();
+            body: body,
+            authorId: 'cmm1vw8uj0000lx8zxq6d63mf',
+        }
+    })
 
     console.log('Success');
 

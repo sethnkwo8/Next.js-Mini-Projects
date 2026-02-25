@@ -17,8 +17,8 @@ export function AddPostForm({ onCancel }: AddPostProps) {
                     <input className="w-full border-black border outline-0 rounded-lg p-2" id="title" name="title" type="text" />
                 </div>
                 <div>
-                    <label className="text-xl" htmlFor="description">Description</label>
-                    <textarea className="w-full border-black border outline-0 rounded-lg p-2" id="description" name="description" />
+                    <label className="text-xl" htmlFor="body">Body</label>
+                    <textarea className="w-full border-black border outline-0 rounded-lg p-2" id="body" name="body" />
                 </div>
                 <button type="submit" className="py-4 px-8 rounded-lg bg-gray-800 hover:bg-gray-700 transition-all ease-in-out duration-300">Add Post</button>
             </form>
