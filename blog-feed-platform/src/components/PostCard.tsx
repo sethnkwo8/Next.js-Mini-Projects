@@ -2,8 +2,11 @@ import Image from "next/image"
 import { PostCardProps } from "@/lib/types"
 import Link from "next/link";
 import { DeletePostButton } from "./DeletePostButton";
+import { getCurrentUserId } from "@/lib/auth";
 
-export function PostCard({ id, email, title, body }: PostCardProps) {
+export function PostCard({ id, authorId, email, title, body }: PostCardProps) {
+    const CURRENT_USER_ID = getCurrentUserId();
+
     return (
         <div className="rounded-lg shadow-lg bg-gray-500 text-white p-4 flex flex-col space-y-3">
 
@@ -24,16 +27,18 @@ export function PostCard({ id, email, title, body }: PostCardProps) {
                 </div>
             </Link>
 
-            <div className="flex gap-4 text-sm">
-                <Link
-                    href={`/posts/${id}/edit`}
-                    className="text-blue-300 hover:text-blue-500"
-                >
-                    Edit
-                </Link>
+            {authorId === CURRENT_USER_ID && (
+                <div className="flex gap-4 text-sm">
+                    <Link
+                        href={`/posts/${id}/edit`}
+                        className="text-blue-300 hover:text-blue-500"
+                    >
+                        Edit
+                    </Link>
 
-                <DeletePostButton postId={id} />
-            </div>
+                    <DeletePostButton postId={id} />
+                </div>
+            )}
         </div>
     )
 }

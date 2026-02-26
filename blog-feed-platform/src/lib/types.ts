@@ -6,6 +6,7 @@ export type PostWithAuthor = Prisma.PostGetPayload<{
 
 export interface PostCardProps {
     id: string
+    authorId: string
     email: string
     title: string
     body: string
