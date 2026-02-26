@@ -9,6 +9,7 @@ export async function PostList({ results }: PostListProps) {
             {posts.map(post => (
                 <PostCard key={post.id} id={post.id} email={post.author.email} title={post.title} body={post.body} />
             ))}
+
         </div>
     )
 }

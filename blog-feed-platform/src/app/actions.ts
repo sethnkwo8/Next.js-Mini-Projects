@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
+const CURRENT_USER_ID = "cmm1vw8uj0000lx8zxq6d63mf"
 export async function CreatePost(formData: FormData) {
     const title = formData.get('title') as string
     const body = formData.get('body') as string
@@ -16,13 +17,40 @@ export async function CreatePost(formData: FormData) {
         data: {
             title: title,
             body: body,
-            authorId: 'cmm1vw8uj0000lx8zxq6d63mf',
+            authorId: CURRENT_USER_ID,
         }
     })
 
     console.log('Success');
 
     revalidatePath('/');
+}
+
+export async function deletePost(formData: FormData) {
+    const postId = formData.get('postId') as string;
+
+    if (!postId) {
+        throw new Error('postId is required')
+    }
+
+    const post = await prisma.post.findUnique({
+        where: { id: postId },
+        include: { author: true }
+    })
+
+    if (!post) {
+        throw new Error('Post not found')
+    }
+
+    if (post.authorId !== CURRENT_USER_ID) {
+        throw new Error('Unauthorized')
+    }
+
+    await prisma.post.delete({
+        where: { id: postId }
+    })
+
+    revalidatePath('/')
 }
 
 export async function logout() {
