@@ -27,3 +27,9 @@ export interface NewPostProps {
 export interface AddPostProps {
     onCancel(): void
 }
+
+export interface EditPostProps {
+    id: string
+    title: string
+    body: string
+}
