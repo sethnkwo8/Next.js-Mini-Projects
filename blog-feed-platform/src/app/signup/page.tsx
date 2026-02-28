@@ -1,4 +1,4 @@
-import { signUp } from "@/lib/auth"
+import { signUp } from "./actions"
 
 export default function SignupPage() {
     return (
@@ -13,14 +13,14 @@ export default function SignupPage() {
                     name="email"
                     type="email"
                     placeholder="Email"
-                    className="w-full p-2 rounded"
+                    className="w-full p-2 rounded outline-0 border border-black"
                 />
 
                 <input
                     name="password"
                     type="password"
                     placeholder="Password"
-                    className="w-full p-2 rounded"
+                    className="w-full p-2 rounded outline-0 border border-black"
                 />
 
                 <button className="bg-gray-800 text-white px-4 py-2 rounded">
