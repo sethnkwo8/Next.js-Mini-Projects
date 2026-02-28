@@ -14,7 +14,12 @@ export async function getCurrentUserId() {
 
     if (!session) return null;
 
-    if (session.expiresAt < new Date()) return null;
+    if (session.expiresAt < new Date()) {
+        await prisma.session.delete({
+            where: { token }
+        })
+        return null;
+    };
 
     return session?.userId
 }
