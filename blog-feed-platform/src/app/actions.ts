@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-const CURRENT_USER_ID = getCurrentUserId();
+const CURRENT_USER_ID = await getCurrentUserId();
 
 export async function CreatePost(formData: FormData) {
     const title = formData.get('title') as string
@@ -13,6 +13,10 @@ export async function CreatePost(formData: FormData) {
 
     if (!title || !body) {
         throw new Error('Title and Body are required')
+    }
+
+    if (!CURRENT_USER_ID) {
+        throw new Error('User not authenticated')
     }
 
     await prisma.post.create({

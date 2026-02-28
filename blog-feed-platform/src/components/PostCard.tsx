@@ -4,8 +4,8 @@ import Link from "next/link";
 import { DeletePostButton } from "./DeletePostButton";
 import { getCurrentUserId } from "@/lib/auth";
 
-export function PostCard({ id, authorId, email, title, body }: PostCardProps) {
-    const CURRENT_USER_ID = getCurrentUserId();
+export async function PostCard({ id, authorId, email, title, body }: PostCardProps) {
+    const CURRENT_USER_ID = await getCurrentUserId();
 
     return (
         <div className="rounded-lg shadow-lg bg-gray-500 text-white p-4 flex flex-col space-y-3">

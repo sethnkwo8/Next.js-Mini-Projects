@@ -9,7 +9,7 @@ export default async function EditPage({
     params: Promise<{ id: string }>
 }) {
 
-    const CURRENT_USER_ID = getCurrentUserId()
+    const CURRENT_USER_ID = await getCurrentUserId()
     const { id } = await params
     const post = await prisma.post.findUnique({
         where: { id: id },

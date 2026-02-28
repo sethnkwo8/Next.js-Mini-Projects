@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function updatePost(formData: FormData) {
-    const CURRENT_USER_ID = getCurrentUserId();
+    const CURRENT_USER_ID = await getCurrentUserId();
 
     const postId = formData.get("postIdUpdate") as string;
     const title = formData.get("updatedTitle") as string;
