@@ -23,7 +23,7 @@ export async function signUp(formData: FormData) {
     }
 
     // Hash password
-    const hashedPassword = hashPassword(password);
+    const hashedPassword = await hashPassword(password);
 
     // Create user
     const user = await prisma.user.create({

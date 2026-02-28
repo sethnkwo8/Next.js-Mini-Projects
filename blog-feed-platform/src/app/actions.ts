@@ -57,6 +57,6 @@ export async function deletePost(formData: FormData) {
 
 export async function logout() {
     const cookieStore = await cookies();
-    cookieStore.delete('authToken');
+    cookieStore.delete('session');
     redirect('/login')
 }
