@@ -1,33 +1,37 @@
 # Next.js Blog Mini Project
 
-A modern Next.js 15+ blog application demonstrating Server Components,
-Server Actions, authentication with middleware, and clean client/server separation.
+A full-stack blog application built with Next.js App Router and Prisma, focused on modern server-first architecture, custom authentication, and clean UX flows.
+
+This project was built intentionally as a learning + portfolio mini project to demonstrate real-world patterns used in production Next.js apps.
 
 ---
 
 ## 🚀 Features
 
 - Server Components for data fetching
-- Client Components for UI interactivity
-- Server Actions for mutations (login, logout, create post)
-- Cookie-based authentication
+- Server Actions for all mutations (create, update, delete, auth)
+- Custom session-based authentication
+- HttpOnly cookies (no client-side auth state)
 - Middleware route protection
-- No client-side auth logic
+- Ownership-based authorization (edit/delete only by author)
+- Optimistic navigation with <Link />
+- Cache revalidation (revalidatePath)
+- Error boundaries & not-found handling
 - No page reloads
-- Optimistic navigation with `<Link />`
 
 ---
 
 ## 🧠 Key Concepts Demonstrated
 
-- Server vs Client Components
-- Server Actions (`'use server'`)
-- Form Actions
-- Middleware authentication
-- Route protection
-- Cookie handling
-- Layouts & metadata
-- Cache revalidation
+- Server vs Client Component boundaries
+- Server Actions ('use server')
+- Form actions & progressive enhancement
+- Custom session auth (no libraries)
+- Middleware authorization logic
+- Secure cookie handling
+- UX-driven redirects & navigation flow
+- Prisma data modeling & queries
+- Intentional feature scoping
 
 ---
 
@@ -35,54 +39,73 @@ Server Actions, authentication with middleware, and clean client/server separati
 
 ```code
 blog-feed-platform/
-└── src/
-    ├── app/
-    │    ├── login/
-    │    │   ├── actions.ts
-    │    │   ├── page.tsx
-    │    │   └── layout.tsx
-    │    ├── posts/
-    │    │   └── [id]/
-    │    │       ├── page.tsx
-    │    │       ├── loading.tsx
-    │    │       └── layout.tsx
-    │    ├── actions.ts
-    │    ├── globals.css
-    │    ├── layout.tsx
-    │    └── page.tsx
-    ├── components/
-    │   ├── AddPostForm.tsx
-    │   ├── FeaturedPostsList.tsx
-    │   ├── HomeClient.tsx
-    │   ├── NewPostButton.tsx
-    │   ├── PostCard.tsx
-    │   ├── PostList.tsx
-    │   └── SlowSection.tsx
-    ├── lib/
-    │   ├── posts.ts
-    │   └── types.ts
-    └── middleware.ts
+├── prisma/
+│   ├── schema.prisma
+│   └── seed.ts
+├── src/
+│   ├── app/
+│   │   ├── login/
+│   │   ├── signup/
+│   │   ├── posts/
+│   │   │   └── [id]/
+│   │   │       ├── edit/
+│   │   │       ├── page.tsx
+│   │   │       └── layout.tsx
+│   │   ├── actions.ts
+│   │   ├── global.css
+│   │   ├── layout.tsx
+│   │   ├── loading.tsx
+│   │   └── page.tsx
+│   ├── components/
+│   │   ├── AddPostForm.tsx
+│   │   ├── EditPostForm.tsx
+│   │   ├── DeletePostButton.tsx
+│   │   ├── PostCard.tsx
+│   │   ├── PostList.tsx
+│   │   ├── SlowSection.tsx
+│   │   ├── NewPostButton.tsx
+│   │   ├── HomeClient.tsx
+│   │   └── FeaturedPostList.tsx
+│   ├── lib/
+│   │   ├── prisma.ts
+│   │   ├── posts.ts
+│   │   ├── auth.ts
+│   │   ├── password.ts
+│   │   └── types.ts
+│   └── middleware.ts
 ```
 
 ---
 
-## 🔐 Authentication Flow
+## 🔐 Authentication & Authorization
 
-- Login sets an HttpOnly cookie via Server Action
-- Middleware checks auth before rendering pages
-- Unauthorized users are redirected to `/login`
-- Authenticated users are redirected away from `/login`
-- Logout clears cookie server-side
+This project uses custom session-based authentication instead of third-party auth libraries.
+
+**How it works:**
+
+- Login creates a session record in the database
+- A secure HttpOnly cookie stores the session token
+- Middleware validates sessions on every request
+- Expired or invalid sessions are rejected
+- Ownership checks are enforced server-side for edits/deletes
+
+**Why custom auth?**    
+- To deeply understand auth fundamentals
+- To demonstrate security awareness
+- To avoid hiding logic behind abstractions
 
 ---
 
-## 📡 Data Source
+## 🗄 Database & ORM
 
-Posts are fetched from:
-```
-https:/jsonplaceholder.typicode.com/posts
-```
-Used for demonstration purposes.
+- Prisma ORM
+- SQLite (for simplicity in a mini project)
+- Models include:
+    - User
+    - Post
+    - Session
+
+All data access is server-only.
 
 ---
 
@@ -91,25 +114,29 @@ Used for demonstration purposes.
 - Next.js (App Router)
 - React
 - TypeScript
+- Prisma
+- SQLite
 - Tailwind CSS
-- Server Actions
-- Middleware
 
 ---
 
-## 📌 Next Steps
+## ❌ Intentional Omissions
 
-- Add database (Prisma)
-- Persist users & posts
-- Add ownership and relations
-- Integrate real authentication
-- Build full-stack Next.js + DRF portfolio project
+These were deliberate decisions:
+- ❌ No roles (single-author ownership model)
+- ❌ No OAuth (focus on auth fundamentals)
+- ❌ No client-side auth state
+- ❌ No state management libraries
+
+The goal was correctness, clarity, and fundamentals, not feature bloat.
 
 ---
 
 ## 🚀 Getting Started
 ```bash
 npm install
+npx prisma migrate dev
+npx prisma db seed
 npm run dev
 ```
 
@@ -118,4 +145,8 @@ npm run dev
 ## 👤 Author
 **Seth Nkwo**
 
-Built as a learning-focused mini project to master modern Next.js architecture.
+Built as a learning-focused mini project to master:
+- Modern Next.js architecture
+- Server-first thinking
+- Authentication & authorization fundamentals
+- UX-driven full-stack design
